@@ -8,6 +8,7 @@ use App\Kehadiran;
 use App\Inventaris;
 use Carbon\Carbon;
 use Session;
+use PDF;
 
 class PeminjamanController extends Controller
 {
@@ -140,5 +141,12 @@ class PeminjamanController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function cetak_pdf()
+    {
+    	$peminjamans = Peminjaman::all();
+ 
+    	$pdf = PDF::loadview('peminjamans_pdf',['peminjamans'=>$peminjamans]);
+    	return $pdf->download('laporan-peminjaman-pdf');
     }
 }

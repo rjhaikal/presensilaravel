@@ -26,3 +26,5 @@ Route::get('/peminjaman', 'PeminjamanController@index')->name('peminjaman.index'
 Route::get('/peminjaman/create', 'PeminjamanController@create')->name('peminjaman.create');
 Route::post('/peminjaman', 'PeminjamanController@store')->name('peminjaman.store');
 Route::get('/peminjaman/{id}/{inventaris_id}', 'PeminjamanController@kembali')->name('peminjaman.kembali');
+Route::get('/peminjaman', 'PeminjamanController@index');
+Route::get('/peminjaman/cetak_pdf', 'PeminjamanController@cetak_pdf');
