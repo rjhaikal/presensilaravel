@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {       
+        stage('Prepare') {
+            steps {
+                checkout([$class: 'GitSCM',
+                branches: [[name: "origin/master"]],
+                doGenerateSubmoduleConfigurations: false,
+                submoduleCfg: [],
+                userRemoteConfigs: [[
+                    url: 'https://github.com/rjhaikal/presensilaravel.git']]
+                ])
+            }
+        }
+    }
+    stages {
+      stage('SonarQube analysis') {
+      steps {
+        script {
+          def scannerHome = tool 'sonarqube-scanner';
+          withSonarQubeEnv(installationName: 'sonarqube1') {
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
+        }
+      }
+    }
+    }
+ }
